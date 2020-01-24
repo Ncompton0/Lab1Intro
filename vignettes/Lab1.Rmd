@@ -1,0 +1,110 @@
+---
+title: "Lab1"
+output: 
+  rmarkdown::html_document:
+    theme: darkly
+    toc: true
+    toc_float: true
+vignette: >
+  %\VignetteIndexEntry{Lab1}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(Lab1Intro)
+```
+
+# Links
+
+[Documentation about package-making](http://r-pkgs.had.co.nz/vignettes.html)
+
+# Latex
+## 1-1 Sample Mean
+
+$$
+\bar{x}_k = \frac{1}{n}\sum_{j=1}^{n}{x_{jk}}\\k=1,2,...,p
+$$
+
+## 1-4 Sample Covarience
+
+$$
+s_{ik} = \frac{1}{n}\sum_{j=1}^{n}{(x_{ij} - \bar{x_i})(x_{jk}-\bar{x_k})}
+$$
+## 1-5 Sample Correlation
+
+$$
+r_{ik} 
+= \frac{s_{ik}}{\sqrt{s_{ii}}\sqrt{s_{kk}}} 
+= \frac{\sum_{j=1}^{n}{(x_{ij} - \bar{x_i})(x_{jk}-\bar{x_k})}}
+  {\sqrt{\sum_{j=1}^{n}(x_{ji}-\bar{x_i})^2}\sqrt{\sum_{j=1}^{n}(s_{jk}-\bar{x_k})^2}}
+$$
+
+## 3-27 
+
+$$
+\textbf{S} = \frac{1}{n-1}\textbf{X}'(\textbf{I} - \frac{1}{n}\textbf{11}')\textbf{X}
+$$
+
+## 3-28
+
+$$
+
+\begin{equation*}
+  \textbf{D}^{1/2}_{p\times{p}} = 
+  \begin{bmatrix}
+  \sqrt{s_{11}} & 0 & \cdots & 0 \\
+  0 & \sqrt{s_{22}} & \cdots & 0 \\
+  \vdots  & \vdots  & \ddots & \vdots  \\
+  0 & 0 & \cdots & \sqrt{s_{pp}} 
+  \end{bmatrix}
+\end{equation*}
+$$
+
+## 3-29
+
+$$
+\textbf{R} = \textbf{D}^{-1/2}\textbf{SD}^{-1/2}
+$$
+
+```{r include=FALSE}
+load("../data/T1-2.rda")
+data = here
+here = as.matrix(sapply(here, as.numeric))
+here = t(here)
+density <- as.vector(data[["Density"]])
+density <- matrix(density, 1, length(density))
+Strength_MD = as.vector(data[["Machine Direction"]])
+Strength_MD = matrix(Strength_MD, 1, length(Strength_MD))
+Strength_CD = as.vector(data[["Cross Direction"]])
+Strength_CD = matrix(Strength_CD, 1, length(Strength_CD))
+```
+
+# Find Sample Mean, Sample Covarience (biased), and Sample Correlation of T1-2 data
+
+## Density
+
+### Sample Mean
+
+```{r}
+mySampleMeanVector(here)
+```
+
+### Sample Covarience
+
+```{r}
+mySampleCovarienceMatrix(here)
+```
+
+### Sample Correlation
+
+```{r}
+mySampleCorrelationMatrix(here)
+```
