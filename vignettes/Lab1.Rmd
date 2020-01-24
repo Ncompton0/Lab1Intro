@@ -38,6 +38,7 @@ $$
 $$
 s_{ik} = \frac{1}{n}\sum_{j=1}^{n}{(x_{ij} - \bar{x_i})(x_{jk}-\bar{x_k})}
 $$
+
 ## 1-5 Sample Correlation
 
 $$
@@ -56,8 +57,6 @@ $$
 ## 3-28
 
 $$
-
-\begin{equation*}
   \textbf{D}^{1/2}_{p\times{p}} = 
   \begin{bmatrix}
   \sqrt{s_{11}} & 0 & \cdots & 0 \\
@@ -65,7 +64,6 @@ $$
   \vdots  & \vdots  & \ddots & \vdots  \\
   0 & 0 & \cdots & \sqrt{s_{pp}} 
   \end{bmatrix}
-\end{equation*}
 $$
 
 ## 3-29
@@ -79,31 +77,24 @@ load("../data/T1-2.rda")
 data = here
 here = as.matrix(sapply(here, as.numeric))
 here = t(here)
-density <- as.vector(data[["Density"]])
-density <- matrix(density, 1, length(density))
-Strength_MD = as.vector(data[["Machine Direction"]])
-Strength_MD = matrix(Strength_MD, 1, length(Strength_MD))
-Strength_CD = as.vector(data[["Cross Direction"]])
-Strength_CD = matrix(Strength_CD, 1, length(Strength_CD))
 ```
 
-# Find Sample Mean, Sample Covarience (biased), and Sample Correlation of T1-2 data
+# T1-2 Data
 
-## Density
 
-### Sample Mean
+## Sample Mean
 
 ```{r}
 mySampleMeanVector(here)
 ```
 
-### Sample Covarience
+## Sample Covarience
 
 ```{r}
 mySampleCovarienceMatrix(here)
 ```
 
-### Sample Correlation
+## Sample Correlation
 
 ```{r}
 mySampleCorrelationMatrix(here)
